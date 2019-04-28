@@ -124,7 +124,7 @@ public class Client {
         System.out.println("2 - Atualizar");
         System.out.println("3 - Excluir");
         System.out.println("4 - Buscar");
-        System.out.println("5 - Buscar");
+        System.out.println("5 - Sair");
         System.out.println("Opção:");
 
         opcao = scanner.nextInt();

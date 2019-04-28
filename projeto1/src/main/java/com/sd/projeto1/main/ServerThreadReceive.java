@@ -1,6 +1,5 @@
 package com.sd.projeto1.main;
 
-import com.sd.projeto1.dao.MapaDao;
 import com.sd.projeto1.model.Mapa;
 import com.sd.projeto1.model.MapaDTO;
 import com.sd.projeto1.util.PropertyManagement;

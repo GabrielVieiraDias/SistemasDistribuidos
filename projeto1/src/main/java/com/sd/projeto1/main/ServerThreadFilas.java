@@ -1,6 +1,5 @@
 package com.sd.projeto1.main;
 
-import com.sd.projeto1.dao.MapaDao;
 import com.sd.projeto1.model.Mapa;
 import com.sd.projeto1.model.MapaDTO;
 import com.sd.projeto1.util.PropertyManagement;
@@ -28,7 +27,6 @@ public class ServerThreadFilas implements Runnable {
     private DatagramSocket socketServidor;
     private static PropertyManagement pm;
     private static byte[] in;
-    private MapaDao mapaDAO = new MapaDao();
     private ExecutorService executor;
 
     /// Recebendo o pacote da Thread Anterior;
@@ -41,7 +39,6 @@ public class ServerThreadFilas implements Runnable {
         try {
             executor = Executors.newCachedThreadPool();
             pm = new PropertyManagement();
-            //socketServidor = new DatagramSocket(pm.getPort());
 
             while (true) {
                 in = new byte[1400];
