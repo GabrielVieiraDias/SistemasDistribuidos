@@ -76,7 +76,7 @@ public class ServerThreadDisco implements Runnable {
 	}
 
 	public static void salvar(Mapa mapValue) {
-		BigInteger key = new BigInteger(String.valueOf(mapValue.getChave()));
+		BigInteger key = new BigInteger(String.valueOf(generateKey()));
 
 		if (mapa.containsKey(mapValue.getChave())) {
 			System.out.println("Mensagem com essa chave já adicionada");
@@ -85,6 +85,9 @@ public class ServerThreadDisco implements Runnable {
 		mapa.put(key, mapValue.getTexto());
 	}
 
+	private static int generateKey(){
+		return mapa.size();
+	}
 	
 
 	public static void editar(Mapa mapValue) {
@@ -99,7 +102,7 @@ public class ServerThreadDisco implements Runnable {
 
 	public static void excluir(Mapa mapValue) {
 		BigInteger key = new BigInteger(String.valueOf(mapValue.getChave()));
-		FileUtils.writeFile(String.valueOf(Utils.DELETE), key, mapValue.getTexto());
+		FileUtils.writeFile(String.valueOf(Utils.DELETE), key, "");
 		mapa.remove(key);
 	}
 
@@ -165,15 +168,20 @@ public class ServerThreadDisco implements Runnable {
 		case 4:
 			
 
-			if (mapaEntity.getChave() != 0) {
+			if (mapaEntity.getChave() >= 0) {
 				mapaEntity.setTipoOperacaoId(4);
-				mapaDTO.setMapa(mapaEntity);
-				// buscar(ma.getChave());
-				imprimeCRUD(mapaEntity);
-				mapaDTO.setMensagem("Recuperado com Sucesso!");
+
+				String msg = buscar(mapaEntity);
+
+                System.out.println("Chave: " + mapaEntity.getChave());
+                System.out.println("Texto: " + msg);
+				//imprimeCRUD(mapaEntity);
+                mapaEntity.setTexto(msg);
+                mapaDTO.setMapa(mapaEntity);
+				mapaDTO.setMensagem(msg);
 
 			} else {
-				mapaDTO.setMensagem("Erro ao recuperar!");
+				mapaDTO.setMensagem("Chave não válida!");
 			}
 			break;
 		default:
