@@ -23,23 +23,5 @@ public class FileUtils {
 		}
 	}
 
-	public static void read() {
 
-		StringBuilder sb = new StringBuilder();
-
-		try (BufferedReader br = Files.newBufferedReader(Paths.get("app.log"))) {
-
-			
-			String line;
-			while ((line = br.readLine()) != null) {
-				sb.append(line).append("\n");
-			}
-
-		} catch (IOException e) {
-			System.err.format("IOException: %s%n", e);
-		}
-
-		System.out.println(sb);
-
-	}
 }
