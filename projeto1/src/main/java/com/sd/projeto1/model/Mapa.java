@@ -33,7 +33,7 @@ public class Mapa implements Serializable{
     }
 
     public Date getData() {
-        return data;
+        return new Date();
     }
 
     public void setData(Date data) {
