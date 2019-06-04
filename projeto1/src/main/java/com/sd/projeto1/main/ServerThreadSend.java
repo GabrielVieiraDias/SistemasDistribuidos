@@ -6,12 +6,9 @@
 package com.sd.projeto1.main;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,7 +25,6 @@ public class ServerThreadSend implements Runnable {
     private DatagramSocket serverSocket;
     private MapaDTO mapaDTO;
     private static byte[] in;
-    private static Map<BigInteger, String> mapa = new HashMap();
 
     public ServerThreadSend(MapaDTO mapaDTO, DatagramSocket serverSocket) {
         this.mapaDTO = new MapaDTO();

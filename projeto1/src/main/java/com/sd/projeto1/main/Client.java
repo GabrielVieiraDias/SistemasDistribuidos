@@ -35,6 +35,7 @@ public class Client {
     static PropertyManagement pm = new PropertyManagement();
 
     public static void main(String[] args) throws SocketException, UnknownHostException, Exception {
+        //tempo de execução da thread = 5 minutos;
         ThreadSnapshot snap = new ThreadSnapshot(300);
         snap.start();
         
