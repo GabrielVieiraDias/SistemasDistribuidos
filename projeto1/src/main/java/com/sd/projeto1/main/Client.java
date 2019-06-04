@@ -1,5 +1,7 @@
 package com.sd.projeto1.main;
 
+import com.sd.projeto1.dao.MapaDao;
+import com.sd.projeto1.dao.SnapshotDao;
 import com.sd.projeto1.model.Mapa;
 import com.sd.projeto1.model.MapaDTO;
 import com.sd.projeto1.util.PropertyManagement;
@@ -25,15 +27,17 @@ import java.util.logging.Logger;
 import org.apache.commons.lang3.SerializationUtils;
 
 public class Client {
-
+    
     private static Queue<DatagramPacket> comandos = new LinkedList<>();
     private static DatagramSocket socketCliente;
     private static InetAddress enderecoIP;
-
+    
     static PropertyManagement pm = new PropertyManagement();
 
-    public static void main(String[] args) throws SocketException, UnknownHostException {
-
+    public static void main(String[] args) throws SocketException, UnknownHostException, Exception {
+        ThreadSnapshot snap = new ThreadSnapshot(300);
+        snap.start();
+        
         socketCliente = new DatagramSocket();
         enderecoIP = InetAddress.getByName(pm.getAddress());
         byte[] receiveData = new byte[1400];
@@ -191,6 +195,8 @@ public class Client {
                 System.out.println("Digite a chave da mensagem que deseja buscar:");
                 chave = scanner.nextInt();
 
+                System.out.println("Busca de chaves: ");
+                
                 mapa = new Mapa();
                 mapa.setChave(chave);
                 mapa.setTipoOperacaoId(4);

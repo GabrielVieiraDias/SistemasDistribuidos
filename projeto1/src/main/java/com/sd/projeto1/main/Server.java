@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.sd.projeto1.model.Mapa;
 import com.sd.projeto1.util.FileUtils;
+import java.io.FileReader;
 
 public class Server {
 
@@ -17,7 +18,7 @@ public class Server {
 		List<Mapa> logs = new ArrayList<Mapa>();
 
 		loadData();
-		ServerThreadDisco.imprimeMapa();
+                ServerThreadDisco.imprimeMapa();
 
 		System.out.println("Log do Disco Recuperado");
 		System.out.println("Tamanho da Fila: " + ServerThreadDisco.mapa.size() + "\n");
