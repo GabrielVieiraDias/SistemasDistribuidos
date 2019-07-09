@@ -15,7 +15,7 @@ public class Server {
 
 	public static void main(String[] args) throws Exception {
 		List<Mapa> logs = new ArrayList<Mapa>();
-
+		
 		loadData();
 		ServerThreadDisco.imprimeMapa();
 

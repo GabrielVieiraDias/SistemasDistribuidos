@@ -27,10 +27,10 @@ import org.apache.commons.lang3.SerializationUtils;
 public class Client {
 
     private static Queue<DatagramPacket> comandos = new LinkedList<>();
-    private static DatagramSocket socketCliente;
-    private static InetAddress enderecoIP;
+    public static DatagramSocket socketCliente;
+    public static InetAddress enderecoIP;
 
-    static PropertyManagement pm = new PropertyManagement();
+    public static PropertyManagement pm = new PropertyManagement();
 
     public static void main(String[] args) throws SocketException, UnknownHostException {
 
@@ -39,6 +39,7 @@ public class Client {
         byte[] receiveData = new byte[1400];
 
         ExecutorService executor = Executors.newCachedThreadPool();
+        
 
         Thread receive = new Thread(new Runnable() {
             @Override
@@ -68,6 +69,7 @@ public class Client {
 
         });
 
+        
         Thread send = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -108,9 +110,11 @@ public class Client {
         return in;
     }
 
+    public static int opcao = 0;
+    
     public static void menu() throws Exception {
 
-        int opcao = 0, chave;
+        int chave;
         String msg;
         BufferedReader mensagem;
         Mapa mapa;
@@ -132,11 +136,14 @@ public class Client {
         switch (opcao) {
             case 1:
             	
-                System.out.println("Digite a Mensagem:");
+                System.out.println("Digite a chave:");
+                chave = scanner.nextInt();
+                
+            	System.out.println("Digite a Mensagem:");
                 msg = mensagem.readLine();
 
                 mapa = new Mapa();
-
+                mapa.setChave(chave);
                 mapa.setTipoOperacaoId(1);
                 mapa.setTexto(msg);
 

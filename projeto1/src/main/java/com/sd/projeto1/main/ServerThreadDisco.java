@@ -70,27 +70,30 @@ public class ServerThreadDisco implements Runnable {
         }
     }
 
-    public static void salvar(Mapa mapValue) {
-        BigInteger key = new BigInteger(String.valueOf(generateKey()));
-
-        if (mapa.containsKey(mapValue.getChave())) {
-            System.out.println("Mensagem com essa chave já adicionada");
+    public static boolean salvar(Mapa mapValue) {
+//        BigInteger key = new BigInteger(String.valueOf(generateKey()));
+    	BigInteger key = new BigInteger(String.valueOf(mapValue.getChave()));
+        boolean inserido;
+        
+    	if (!mapa.containsKey(key)) {
+    		FileUtils.writeFile(String.valueOf(Utils.CREATE), key, mapValue.getTexto());
+            mapa.put(key, mapValue.getTexto());
+            inserido = true;
+        } else {
+        	System.out.println("Mensagem com essa chave já adicionada");
+        	inserido = false;
         }
-        FileUtils.writeFile(String.valueOf(Utils.CREATE), key, mapValue.getTexto());
-        mapa.put(key, mapValue.getTexto());
+    	return inserido;
     }
 
-    private static int generateKey() {
-        return mapa.size();
-    }
+//    private static int generateKey() {
+//        return mapa.size();
+//    }
 
 
     public static void editar(Mapa mapValue) {
         BigInteger key = new BigInteger(String.valueOf(mapValue.getChave()));
-
-        if (!mapa.containsKey(mapValue.getChave())) {
-            System.out.println("Chave não encontrada");
-        }
+        
         FileUtils.writeFile(String.valueOf(Utils.UPDATE), key, mapValue.getTexto());
         mapa.put(key, mapValue.getTexto());
     }
@@ -134,15 +137,17 @@ public class ServerThreadDisco implements Runnable {
         switch (mapaEntity.getTipoOperacaoId()) {
             case 1:
 
-
+            	boolean inserido = false;
                 if (mapaEntity != null) {
                     mapaDTO.setMapa(mapaEntity);
-                    salvar(mapaEntity);
+                    inserido = salvar(mapaEntity);
                     imprimeCRUD(mapaEntity);
-                    mapaDTO.setMensagem("Inserido com Sucesso!");
-
+                }
+                
+                if(inserido) {
+                	mapaDTO.setMensagem("Inserido com Sucesso!");
                 } else {
-                    mapaDTO.setMensagem("Erro ao inserir!");
+                	mapaDTO.setMensagem("Erro ao inserir!");
                 }
                 break;
             case 2:

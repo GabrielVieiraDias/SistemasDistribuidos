@@ -23,5 +23,18 @@ public class FileUtils {
 		}
 	}
 
+//	public static void getKeysFile() {
+//		try (BufferedReader br = Files.newBufferedReader(Paths.get("app.log"))) {
+//
+//			String line;
+//			while ((line = br.readLine()) != null) {
+//				String[] content = line.split("#");
+//				if(content.length>1){
+//				}
+//				}
+//			}
+//			
+//		}cath	
+//	}
 
 }
